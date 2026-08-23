@@ -1,0 +1,2 @@
+rtl/reference/multiplier_accelerator.sv
+tb/reference/tb_multiplier_accelerator.sv
