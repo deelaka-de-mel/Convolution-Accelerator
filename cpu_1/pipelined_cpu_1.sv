@@ -11,7 +11,7 @@ module pipelined_cpu(
     logic [15:0] regs [16];
 
     // Registers 
-
+    
     logic [15:0] if_id_ir;
     
     // ID/EX Stage Registers
@@ -40,11 +40,14 @@ module pipelined_cpu(
     logic [15:0] rd_data1, rd_data2;
 
     always_comb begin
+
+        // {i_rs2[3:0], i_rs1[3:0], i_rd[3:0], opcode[3:0]}
+        // memory/branch: {addr[7:0], i_reg[3:0], opcode[3:0]}
         id_opcode = if_id_ir[3:0];
         id_addr   = if_id_ir[15:8];
         id_reg    = if_id_ir[7:4];
         id_rs2    = if_id_ir[15:12];
-        id_rs1    = if_id_ir[11:8];
+        id_rs1    = if_id_ir[11:8]; 
         id_rd     = if_id_ir[7:4];
 
         rd_data1  = regs[id_rs1];
