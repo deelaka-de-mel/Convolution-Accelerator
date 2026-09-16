@@ -26,6 +26,11 @@ module tb_conv_pe_3x3_pipelined;
         .output_valid(output_valid)
     );
 
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_conv_pe_3x3_pipelined);
+	end
+
     // Clock
     initial clk = 0;
     always #5 clk = ~clk;
