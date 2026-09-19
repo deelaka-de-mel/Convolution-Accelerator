@@ -12,10 +12,10 @@ module pipelined_cpu(
 
     // Registers 
     
-    logic [15:0] if_id_ir;
+    logic [15:0] if_id_ir; //to keep the full instruction
     
     // ID/EX Stage Registers
-    logic [3:0]  id_ex_opcode, id_ex_rd, id_ex_reg;
+    logic [3:0]  id_ex_opcode, id_ex_rd, id_ex_reg; //to keep op
     logic [7:0]  id_ex_addr;
     logic [15:0] id_ex_reg1, id_ex_reg2;
 
@@ -28,12 +28,12 @@ module pipelined_cpu(
     logic [3:0]  mem_wb_opcode, mem_wb_rd, mem_wb_reg;
     logic [15:0] mem_wb_data;
 
-    // --- FETCH STAGE ---
+    //  FETCH STAGE 
     always_comb begin
         imem_addr = pc;
     end
 
-    // --- DECODE STAGE SIGNALS ---
+    //  DECODE STAGE SIGNALS 
     logic [3:0] id_opcode;
     logic [7:0] id_addr;
     logic [3:0] id_reg, id_rs1, id_rs2, id_rd;
