@@ -144,23 +144,42 @@ module conv_accel_regs (
     // (window, weights, input_valid -> conv_out, output_valid) identical
     // so nothing above this line needs to change.
     // =================================================================
-    logic [3:0] valid_delay;
-    always_ff @(posedge clk) begin
-        if (rst) begin
-            valid_delay <= 4'd0;
-        end else begin
-            valid_delay <= {valid_delay[2:0], input_valid};
-        end
-    end
-    assign output_valid = valid_delay[3]; // fake ~5-stage latency like the real PE
+    // logic [3:0] valid_delay;
+    // always_ff @(posedge clk) begin
+    //     if (rst) begin
+    //         valid_delay <= 4'd0;
+    //     end else begin
+    //         valid_delay <= {valid_delay[2:0], input_valid};
+    //     end
+    // end
+    // assign output_valid = valid_delay[3]; // fake ~5-stage latency like the real PE
 
-    always_comb begin
-        // Trivial placeholder: sum of (pixel*weight) computed combinationally,
-        // just so the register interface is exercisable before the real PE exists.
-        conv_out = 20'sd0;
-        for (int k = 0; k < 9; k = k + 1)
-            conv_out = conv_out + ($signed({1'b0, window[k]}) * weights[k]);
-    end
+    // always_comb begin
+    //     // Trivial placeholder: sum of (pixel*weight) computed combinationally,
+    //     // just so the register interface is exercisable before the real PE exists.
+    //     conv_out = 20'sd0;
+    //     for (int k = 0; k < 9; k = k + 1)
+    //         conv_out = conv_out + ($signed({1'b0, window[k]}) * weights[k]);
+    // end
+
+    // integration
+    // =================================================================
+    // REAL PIPELINED 3X3 CONVOLUTION PROCESSING ELEMENT
+    // =================================================================
+    conv_pe_3x3_pipelined u_pe (
+        .clk          (clk),
+        .rst          (rst),
+        .window       (window),
+        .weights      (weights),
+        .input_valid  (input_valid),
+        .conv_out     (conv_out),
+        .output_valid (output_valid)
+    );
+    // =================================================================
+    // END REAL PE INSTANTIATION
+    // =================================================================
+
+
     // =================================================================
     // END PLACEHOLDER COMPUTE
     // =================================================================
