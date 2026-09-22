@@ -1,0 +1,2 @@
+tb/reference/tb_dual_port_mem_convolution.sv
+rtl/dual_port_mem_convolution.sv
