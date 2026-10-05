@@ -14,12 +14,12 @@ module window_gen #(
 
     logic [PIXEL_WIDTH-1:0] row1_pixel, row0_pixel;
 
-    line_buffer #(.WIDTH(PIXEL_WIDTH), .DEPTH(IMG_WIDTH)) lb0 ( // no output for 512 cycles
+    lineBuffer #(.WIDTH(PIXEL_WIDTH), .DEPTH(IMG_WIDTH)) lb0 ( // no output for 512 cycles
         .clk(clk), .rst(rst), .wr_en(pixel_valid),
         .data_in(pixel_in), .data_out(row1_pixel)
     );
 
-    line_buffer #(.WIDTH(PIXEL_WIDTH), .DEPTH(IMG_WIDTH)) lb1 ( // no output for 512*2 cycles
+    lineBuffer #(.WIDTH(PIXEL_WIDTH), .DEPTH(IMG_WIDTH)) lb1 ( // no output for 512*2 cycles
         .clk(clk), .rst(rst), .wr_en(pixel_valid),
         .data_in(row1_pixel), .data_out(row0_pixel)
     );

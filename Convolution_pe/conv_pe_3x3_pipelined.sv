@@ -6,7 +6,7 @@ module conv_pe_3x3_pipelined (
     input  logic [7:0]              window  [0:8],
     input  logic signed [7:0]       weights [0:8],
 
-    output logic signed [19:0]      conv_out,
+    output logic [7:0]              result_out,
     output logic                    output_valid
 );
 
@@ -126,6 +126,7 @@ module conv_pe_3x3_pipelined (
 
 
     // Stage 4: 2 -> 1
+    logic signed [19:0] conv_out;
 
 
     always_ff @(posedge clk or posedge rst) begin
@@ -141,11 +142,12 @@ module conv_pe_3x3_pipelined (
 
 
     logic [3:0] valid_pipe;
+    logic conv_out_valid;
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             valid_pipe <= '0;
-            output_valid  <= 1'b0;
+            conv_out_valid <= 1'b0;
         end
         else begin
             valid_pipe[0] <= input_valid;
@@ -153,8 +155,22 @@ module conv_pe_3x3_pipelined (
             valid_pipe[2] <= valid_pipe[1];
             valid_pipe[3] <= valid_pipe[2];
 
-            output_valid <= valid_pipe[3];
+            conv_out_valid <= valid_pipe[3];
         end
     end
+
+    quantizer q1 #(
+        .IN_W(20),
+        .OUT_W(8),
+        .SHIFT(4)
+    )(
+        .clk(clk),
+        .rst(rst),
+        .in_valid(conv_out_valid),
+        .data_in(conv_out),
+
+        .data_out(result_out),
+        .out_valid(output_valid)
+    );
 
 endmodule
