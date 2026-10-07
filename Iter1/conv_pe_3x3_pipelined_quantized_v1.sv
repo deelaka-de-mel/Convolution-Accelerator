@@ -3,16 +3,15 @@ module conv_pe_3x3_pipelined_quantized (
     input  logic                    rst,
     input  logic                    input_valid,
 
-    input  logic [71:0]              window_flat,
-    input  logic signed [71:0]       weights_flat,
-    input logic                      input_last,
+    input  logic [7:0]              window  [0:8],
+    input  logic signed [7:0]       weights [0:8],
 
     output logic [7:0]              result_out,
-    output logic                    output_last
     output logic                    output_valid
 );
 
     // Stage 0: Multiplication
+
 
     logic signed [15:0] product     [0:8];
     logic signed [15:0] product_reg [0:8];
@@ -20,14 +19,21 @@ module conv_pe_3x3_pipelined_quantized (
     always_comb begin
         for (int i = 0; i < 9; i++) begin
             product[i] =
-                $signed({1'b0, window_flat[8*i +: 8]}) * $signed(weights_flat[8*i +: 8]);
+                $signed({1'b0, window[i]}) * weights[i];
         end
     end
 
-    always_ff @(posedge clk) begin
-        for (int i = 0; i < 9; i++)
-            product_reg[i] <= product[i];
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            for (int i = 0; i < 9; i++)
+                product_reg[i] <= '0;
+        end
+        else if (input_valid) begin
+            for (int i = 0; i < 9; i++)
+                product_reg[i] <= product[i];
+        end
     end
+
 
 
     // Stage 1: 9 -> 5
@@ -52,12 +58,21 @@ module conv_pe_3x3_pipelined_quantized (
         s1[4] = $signed(product_reg[8]);
     end
 
-    always_ff @(posedge clk) begin
-        for (int i = 0; i < 5; i++)
-            s1_reg[i] <= s1[i];
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            for (int i = 0; i < 5; i++)
+                s1_reg[i] <= '0;
+        end
+        else begin
+            for (int i = 0; i < 5; i++)
+                s1_reg[i] <= s1[i];
+        end
     end
 
+
+
     // Stage 2: 5 -> 3
+
 
     logic signed [17:0] s2     [0:2];
     logic signed [17:0] s2_reg [0:2];
@@ -72,10 +87,18 @@ module conv_pe_3x3_pipelined_quantized (
         s2[2] = $signed(s1_reg[4]);
     end
 
-    always_ff @(posedge clk) begin
-        for (int i = 0; i < 3; i++)
-            s2_reg[i] <= s2[i];
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            for (int i = 0; i < 3; i++)
+                s2_reg[i] <= '0;
+        end
+        else begin
+            for (int i = 0; i < 3; i++)
+                s2_reg[i] <= s2[i];
+        end
     end
+
+
 
     // Stage 3: 3 -> 2
    
@@ -90,25 +113,38 @@ module conv_pe_3x3_pipelined_quantized (
         s3[1] = $signed(s2_reg[2]);
     end
 
-    always_ff @(posedge clk) begin
-        for (int i = 0; i < 2; i++)
-            s3_reg[i] <= s3[i];
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            for (int i = 0; i < 2; i++)
+                s3_reg[i] <= '0;
+        end
+        else begin
+            for (int i = 0; i < 2; i++)
+                s3_reg[i] <= s3[i];
+        end
     end
+
 
     // Stage 4: 2 -> 1
     logic signed [19:0] conv_out;
 
-    always_ff @(posedge clk) begin
-        conv_out <= $signed(s3_reg[0]) +
-                    $signed(s3_reg[1]);
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            conv_out <= '0;
+        else
+            conv_out <= $signed(s3_reg[0]) +
+                        $signed(s3_reg[1]);
     end
 
+
     // Valid / Done pipeline
+
 
     logic [3:0] valid_pipe;
     logic conv_out_valid;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             valid_pipe <= '0;
             conv_out_valid <= 1'b0;
