@@ -1,4 +1,4 @@
-module conv_pe_3x3_pipelined_quantized (
+module conv_pe(
     input  logic                    clk,
     input  logic                    rst,
     input  logic                    input_valid,
@@ -8,7 +8,7 @@ module conv_pe_3x3_pipelined_quantized (
     input logic                      input_last,
 
     output logic [7:0]              result_out,
-    output logic                    output_last
+    output logic                    output_last,
     output logic                    output_valid
 );
 
@@ -29,9 +29,7 @@ module conv_pe_3x3_pipelined_quantized (
             product_reg[i] <= product[i];
     end
 
-
     // Stage 1: 9 -> 5
-
 
     logic signed [16:0] s1     [0:4];
     logic signed [16:0] s1_reg [0:4];
@@ -123,6 +121,24 @@ module conv_pe_3x3_pipelined_quantized (
         end
     end
 
+    logic [3:0] last_pipe;
+    logic conv_out_last;
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            last_pipe <= '0;
+            conv_out_last <= 1'b0;
+        end
+        else begin
+            last_pipe[0] <= input_last;
+            last_pipe[1] <= last_pipe[0];
+            last_pipe[2] <= last_pipe[1];
+            last_pipe[3] <= last_pipe[2];
+
+            conv_out_last <= last_pipe[3];
+        end
+    end
+
     quantizer #(
         .IN_W(20),
         .OUT_W(8),
@@ -132,8 +148,10 @@ module conv_pe_3x3_pipelined_quantized (
         .rst(rst),
         .in_valid(conv_out_valid),
         .data_in(conv_out),
+        .in_last(conv_out_last),
 
         .data_out(result_out),
+        .out_last(output_last),
         .out_valid(output_valid)
     );
 

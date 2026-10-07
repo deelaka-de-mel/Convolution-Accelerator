@@ -6,10 +6,12 @@ module quantizer #(
     input logic clk,
     input logic rst,
     input logic in_valid,
+    input logic in_last,
     input logic signed [IN_W-1: 0] data_in,
 
     output logic [OUT_W-1:0] data_out,
-    output logic out_valid
+    output logic out_valid,
+    output logic out_last
 );
 
     logic signed [IN_W : 0] rounded_data;
@@ -46,6 +48,7 @@ module quantizer #(
     end
 
     logic [1:0] valid_pipe;
+    logic [1:0] last_pipe;
 
     always_ff @(posedge clk) begin
         if (rst) begin
@@ -57,6 +60,17 @@ module quantizer #(
         end
     end
 
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            last_pipe <= 0;
+        end
+        else begin
+            last_pipe[0] <=in_last;
+            last_pipe[1] <= last_pipe[0];
+        end
+    end
+
     assign out_valid = valid_pipe[1];
+    assign out_last = last_pipe[1];
 
 endmodule
