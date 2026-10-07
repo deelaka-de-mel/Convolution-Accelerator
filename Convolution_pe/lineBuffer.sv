@@ -1,6 +1,6 @@
 module lineBuffer #(
     parameter WIDTH = 8,
-    parameter DEPTH = 512
+    parameter DEPTH = 64
 )(
     input  logic             clk,
     input  logic             rst,
@@ -8,7 +8,7 @@ module lineBuffer #(
     input  logic [WIDTH-1:0] data_in,
     output logic [WIDTH-1:0] data_out
 );
-    logic [WIDTH-1:0] mem [0:DEPTH-1];
+    (* ramstyle = "M9K" *) logic [WIDTH-1:0] mem [0:DEPTH-1];
     logic [$clog2(DEPTH)-1:0] ptr;
 
     always_ff @(posedge clk or posedge rst) begin

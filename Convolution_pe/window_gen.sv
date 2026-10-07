@@ -1,7 +1,7 @@
 module window_gen #(
     parameter PIXEL_WIDTH = 8,
-    parameter IMG_WIDTH   = 512,
-    parameter IMG_HEIGHT  = 512
+    parameter IMG_WIDTH   = 64,
+    parameter IMG_HEIGHT  = 64
 )(
     input  logic                    clk,
     input  logic                    rst,

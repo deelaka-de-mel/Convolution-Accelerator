@@ -21,11 +21,8 @@ module quantizer #(
 
     logic signed [IN_W:0] reg_rounded_data;
 
-    always_ff @(posedge clk or posedge rst) begin : rounded_result
-        if (rst) reg_rounded_data <=0;
-        else begin
-            reg_rounded_data <= rounded_data;
-        end
+    always_ff @(posedge clk) begin : rounded_result
+        reg_rounded_data <= rounded_data;
     end
 
     logic signed [IN_W:0] shifted_data;
@@ -39,19 +36,18 @@ module quantizer #(
 
     always_comb begin
         if (shifted_data[IN_W]) clamped_data = 0;
-        else if (shifted_data > MAX_VALUE) clamped_data = MAX_VALUE[OUT_W-1:0];
+        else if (shifted_data > MAX_VALUE) clamped_data = OUT_W'(MAX_VALUE);
         else clamped_data = shifted_data[OUT_W-1:0];
     end
 
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) data_out <=0;
-        else data_out <= clamped_data;
+    always_ff @(posedge clk) begin
+        data_out <= clamped_data;
         
     end
 
     logic [1:0] valid_pipe;
 
-    always_ff @(posedge clk or posedge rst) begin
+    always_ff @(posedge clk) begin
         if (rst) begin
             valid_pipe <= 0;
         end
