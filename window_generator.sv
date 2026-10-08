@@ -1,6 +1,6 @@
 module window_generator #(
-    parameter IMAGE_WIDTH  = 512,
-    parameter IMAGE_HEIGHT = 512,
+    parameter IMAGE_WIDTH  = 256,
+    parameter IMAGE_HEIGHT = 256,
     parameter DATA_WIDTH   = 8,
     parameter ADDR_WIDTH   = 18
 )(
