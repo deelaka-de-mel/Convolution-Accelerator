@@ -3,8 +3,8 @@
 #define IMG_BASE  0x30000000u
 #define LED_REG   (*(volatile uint32_t *)0x10000000u)
 #define HEX_REG   (*(volatile uint32_t *)0x40000000u)
-
-#define NUM_PIXELS (64 * 64)
+    
+#define NUM_PIXELS (256 * 256)
 
 #define CLK_HZ    50000000u   // set to your PLL c0 frequency
 #define DELAY_MS  200u        // time per pixel
