@@ -1,0 +1,92 @@
+# Copyright (C) 2022  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+
+# Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
+# File: C:\Users\USER\OneDrive\Desktop\Prometheus_Quartus\prometheus.csv
+# Generated on: Fri Oct  9 09:07:34 2026
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
+CLOCK_50,Input,PIN_Y2,2,B2_N0,PIN_Y2,3.3-V LVTTL,,,,,
+HEX0[6],Output,PIN_H22,6,B6_N0,PIN_H22,2.5 V,,,,,
+HEX0[5],Output,PIN_J22,6,B6_N0,PIN_J22,2.5 V,,,,,
+HEX0[4],Output,PIN_L25,6,B6_N1,PIN_L25,2.5 V,,,,,
+HEX0[3],Output,PIN_L26,6,B6_N1,PIN_L26,2.5 V,,,,,
+HEX0[2],Output,PIN_E17,7,B7_N2,PIN_E17,2.5 V,,,,,
+HEX0[1],Output,PIN_F22,7,B7_N0,PIN_F22,2.5 V,,,,,
+HEX0[0],Output,PIN_G18,7,B7_N2,PIN_G18,2.5 V,,,,,
+HEX1[6],Output,PIN_U24,5,B5_N0,PIN_U24,2.5 V,,,,,
+HEX1[5],Output,PIN_U23,5,B5_N1,PIN_U23,2.5 V,,,,,
+HEX1[4],Output,PIN_W25,5,B5_N1,PIN_W25,2.5 V,,,,,
+HEX1[3],Output,PIN_W22,5,B5_N0,PIN_W22,2.5 V,,,,,
+HEX1[2],Output,PIN_W21,5,B5_N1,PIN_W21,2.5 V,,,,,
+HEX1[1],Output,PIN_Y22,5,B5_N0,PIN_Y22,2.5 V,,,,,
+HEX1[0],Output,PIN_M24,6,B6_N2,PIN_M24,2.5 V,,,,,
+HEX2[6],Output,PIN_W28,5,B5_N1,PIN_W28,2.5 V,,,,,
+HEX2[5],Output,PIN_W27,5,B5_N1,PIN_W27,2.5 V,,,,,
+HEX2[4],Output,PIN_Y26,5,B5_N1,PIN_Y26,2.5 V,,,,,
+HEX2[3],Output,PIN_W26,5,B5_N1,PIN_W26,2.5 V,,,,,
+HEX2[2],Output,PIN_Y25,5,B5_N1,PIN_Y25,2.5 V,,,,,
+HEX2[1],Output,PIN_AA26,5,B5_N1,PIN_AA26,2.5 V,,,,,
+HEX2[0],Output,PIN_AA25,5,B5_N1,PIN_AA25,2.5 V,,,,,
+KEY[3],Input,PIN_R24,5,B5_N0,PIN_R24,3.3-V LVTTL,,,,,
+KEY[2],Input,PIN_N21,6,B6_N2,PIN_N21,3.3-V LVTTL,,,,,
+KEY[1],Input,PIN_M21,6,B6_N1,PIN_M21,3.3-V LVTTL,,,,,
+KEY[0],Input,PIN_M23,6,B6_N2,PIN_M23,3.3-V LVTTL,,,,,
+LEDG[8],Output,PIN_F17,7,B7_N2,PIN_F17,2.5 V,,,,,
+LEDG[7],Output,PIN_G21,7,B7_N1,PIN_G21,2.5 V,,,,,
+LEDG[6],Output,PIN_G22,7,B7_N2,PIN_G22,2.5 V,,,,,
+LEDG[5],Output,PIN_G20,7,B7_N1,PIN_G20,2.5 V,,,,,
+LEDG[4],Output,PIN_H21,7,B7_N2,PIN_H21,2.5 V,,,,,
+LEDG[3],Output,PIN_E24,7,B7_N1,PIN_E24,2.5 V,,,,,
+LEDG[2],Output,PIN_E25,7,B7_N1,PIN_E25,2.5 V,,,,,
+LEDG[1],Output,PIN_E22,7,B7_N0,PIN_E22,2.5 V,,,,,
+LEDG[0],Output,PIN_E21,7,B7_N0,PIN_E21,2.5 V,,,,,
+LEDR[17],Output,PIN_H15,7,B7_N2,PIN_H15,2.5 V,,,,,
+LEDR[16],Output,PIN_G16,7,B7_N2,PIN_G16,2.5 V,,,,,
+LEDR[15],Output,PIN_G15,7,B7_N2,PIN_G15,2.5 V,,,,,
+LEDR[14],Output,PIN_F15,7,B7_N2,PIN_F15,2.5 V,,,,,
+LEDR[13],Output,PIN_H17,7,B7_N2,PIN_H17,2.5 V,,,,,
+LEDR[12],Output,PIN_J16,7,B7_N2,PIN_J16,2.5 V,,,,,
+LEDR[11],Output,PIN_H16,7,B7_N2,PIN_H16,2.5 V,,,,,
+LEDR[10],Output,PIN_J15,7,B7_N2,PIN_J15,2.5 V,,,,,
+LEDR[9],Output,PIN_G17,7,B7_N1,PIN_G17,2.5 V,,,,,
+LEDR[8],Output,PIN_J17,7,B7_N2,PIN_J17,2.5 V,,,,,
+LEDR[7],Output,PIN_H19,7,B7_N2,PIN_H19,2.5 V,,,,,
+LEDR[6],Output,PIN_J19,7,B7_N2,PIN_J19,2.5 V,,,,,
+LEDR[5],Output,PIN_E18,7,B7_N1,PIN_E18,2.5 V,,,,,
+LEDR[4],Output,PIN_F18,7,B7_N1,PIN_F18,2.5 V,,,,,
+LEDR[3],Output,PIN_F21,7,B7_N0,PIN_F21,2.5 V,,,,,
+LEDR[2],Output,PIN_E19,7,B7_N0,PIN_E19,2.5 V,,,,,
+LEDR[1],Output,PIN_F19,7,B7_N0,PIN_F19,2.5 V,,,,,
+LEDR[0],Output,PIN_G19,7,B7_N2,PIN_G19,2.5 V,,,,,
+CLOCK2_50,Unknown,PIN_AG14,3,B3_N0,,3.3-V LVTTL,,,,,
+CLOCK3_50,Unknown,PIN_AG15,4,B4_N2,,3.3-V LVTTL,,,,,
+UART_RXD,Unknown,PIN_G12,8,B8_N1,,,,,,,
+LCD_DATA[0],Unknown,PIN_L3,1,B1_N1,,,,,,,
+LCD_BLON,Unknown,PIN_L6,1,B1_N2,,,,,,,
+LCD_EN,Unknown,PIN_L4,1,B1_N1,,,,,,,
+LCD_ON,Unknown,PIN_L5,1,B1_N1,,,,,,,
+LCD_RS,Unknown,PIN_M2,1,B1_N2,,,,,,,
+LCD_RW,Unknown,PIN_M1,1,B1_N2,,,,,,,
+LCD_DATA[1],Unknown,PIN_L1,1,B1_N2,,,,,,,
+LCD_DATA[2],Unknown,PIN_L2,1,B1_N2,,,,,,,
+LCD_DATA[3],Unknown,PIN_K7,1,B1_N1,,,,,,,
+LCD_DATA[4],Unknown,PIN_K1,1,B1_N1,,,,,,,
+LCD_DATA[5],Unknown,PIN_K2,1,B1_N1,,,,,,,
+LCD_DATA[6],Unknown,PIN_M3,1,B1_N1,,,,,,,
+LCD_DATA[7],Unknown,PIN_M5,1,B1_N2,,,,,,,
+UART_TXD,Unknown,PIN_G9,8,B8_N2,,,,,,,

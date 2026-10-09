@@ -1,11 +1,11 @@
 from PIL import Image
 
 # Open image, convert to 8-bit grayscale, and resize to 64x64
-img = Image.open("tools\\cpu_1\\input.png").convert("L").resize((64, 64))
+img = Image.open("input.png").convert("L").resize((64, 64))
 pixels = list(img.getdata())
 
 # Save to image.hex (1024 lines)
-with open("tools\\cpu_1\\image.hex", "w") as f:
+with open("image.hex", "w") as f:
     for i in range(0, len(pixels), 4):
         p0, p1, p2, p3 = pixels[i : i + 4]
         # Pack 4 pixels into 32-bit word

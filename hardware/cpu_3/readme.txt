@@ -1,0 +1,1 @@
+here I used the mif file approach to read image faster 
